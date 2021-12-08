@@ -2,17 +2,17 @@
 
 class Obstacles {
 
-    constructor(x,y,type){
+    constructor(x,y,isGood){
         //properties to draw
         this.x = x;
         this.y = y;
         this.dx = Math.floor(Math.random() * canvas.width);
         this.radius = Math.floor(Math.random() * 40) + 20;
         // speed and reset properties
-        this.dy = 0.5;
+        this.dy = 1;
         this.resetY = y; 
-        
-        this.goodType = type;
+        this.obstacles = [];
+        this.isGood = isGood;
         this.colors = [ 'red', 'green', 'blue', 'orange', 'yellow', 'purple'];
         this.colorIndex = this.colors[Math.floor(Math.random() * this.colors.length)];
         
@@ -25,10 +25,12 @@ class Obstacles {
         ctx.lineWidth = 2;
         ctx.stroke();
         ctx.closePath();
-        this.y += this.dy; 
+        this.y += this.dy;         
+    }
+    //makes the obstacles loop and change its properties
 
-        //makes the obstacles loop and change its properties
-        
+    loopObstacles() {
+
         if (this.y === canvas.height + (this.radius * 2) ) {
         
             this.y = this.resetY;
@@ -40,12 +42,9 @@ class Obstacles {
             console.log("here!");
         }
     }
+    
 }
 
-let obstacle = new Obstacles(Math.random() * canvas.width - 20,-35, true);
-let obstacle2 = new Obstacles(Math.random() * canvas.width - 20, -170, false);
-let obstacle3 = new Obstacles(Math.random() * canvas.width - 20, -200, true);
-let obstacle4 = new Obstacles(Math.random() * canvas.width - 20, -560, false);
-let obstacle5 = new Obstacles(Math.random() * canvas.width - 20, -830, true);
+
 
 
