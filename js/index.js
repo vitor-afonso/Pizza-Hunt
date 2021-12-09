@@ -1,9 +1,9 @@
 //jshint esversion:6
-
-let currentGame;
 let canvas = document.querySelector('canvas');
 let ctx = canvas.getContext('2d');
-let obstacleNum = 0;
+
+let currentGame;
+let player;
 
 function clearCanvas() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -12,31 +12,35 @@ function clearCanvas() {
 function updateCanvas() {
 
     clearCanvas();
-    obstacleNum++;
+    
     let currentObstacle;
-    // push a new obstacle if the obstacleNum is divisible by 200
-    if(obstacleNum % 200 === 0) {
-        //Assign my new obstacle to my new game
-        currentObstacle = new Obstacles(Math.random() * canvas.width - 20,Math.floor(Math.random() * -35) + -300, true);
+    currentGame.obstaclesFrequency++;
+
+    // push a new obstacle if the obstacleNumber is divisible by 200
+    if (currentGame.obstaclesFrequency % 50 === 0 && currentGame.obstacles.length < 6) {
+
+        //Assign my new obstacle to my obstaclesArray
+        currentObstacle = new Obstacles(Math.random() * canvas.width - 20, Math.floor(Math.random() * -35), currentGame.isGood[Math.floor(Math.random() * 2)]);
         currentGame.obstacles.push(currentObstacle);
 
     }
     
-    currentGame.obstacles.forEach((item) => {
+    currentGame.obstacles.forEach((item, i) => {
+        
         item.drawObstacle();
-        player.detectCollision(item);
+        player.detectCollision(item, i);
     });
-    
+
     player.drawPlayer();
     
     let animationFrameId = requestAnimationFrame(updateCanvas);
 
-  // if (obstacle.y > canvas.height) {
-  //   cancelAnimationFrame(animationFrameId);
-  // }
+  if (player.health < 1) {
+      
+    cancelAnimationFrame(animationFrameId);
+  }
 
 }
-
 
 window.onload = () => {
     document.querySelector('#btn-start').onclick = () => {
@@ -44,14 +48,9 @@ window.onload = () => {
         startGame();
     };
     function startGame() {
-
-        //Instantiate new game
+        
         currentGame = new Game();
-        //Instantiate new obstacle
-        
-        
-        
-        
+        player = new Player();
         updateCanvas();
     }
 };
