@@ -9,22 +9,26 @@
 </head>
 <body>
     
-    <section id="start-game">
+    <section id="game-container">
 
         <div id="instructions-info">
 
-          <h5 id="instructions-title">Ironhack Project 1 - Game</h5>
-          <p id="instructions-text">This is the instructions to play the game.</p>
-          <a id="btn-start" href="#" class="btn">Start Game</a>
+            <h3 id="instructions-title">Ironhack Project 1 - Game</h3>
+            <p id="instructions-text">This is the instructions to play the game.</p>
+            <a id="btn-start" href="#" class="btn">Start Game</a>
+            <a id="btn-restart" href="#" class="btn hide-btn">Restart</a>
+
+            <div id="game-info">
+                <div id="player-health" class="info">Health: 0</div>
+                <div id="player-highscore" class="info">Current score: 0</div>
+            </div>
 
         </div>
 
+
         <canvas width="700" height="500"></canvas>
 
-        <section id="game-info">
-            <div id="player-health" class="info"></div>
-            <div id="player-highscore" class="info"></div>
-        </section>
+        
 
     </section>
 

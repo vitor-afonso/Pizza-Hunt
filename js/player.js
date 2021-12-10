@@ -16,7 +16,7 @@ class Player {
     moveKey(event) {
         // Stop the default behavior (moving the screen to the left/up/right/down)
         event.preventDefault();
-        //TODO: Create in player
+        
         // React based on the key pressed
         switch (event.keyCode) {
         case 37:

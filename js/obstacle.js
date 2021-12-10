@@ -9,7 +9,7 @@ class Obstacles {
         //this.dx = Math.floor(Math.random() * canvas.width);
         this.radius = Math.floor(Math.random() * 40) + 20;
         // speed and reset properties
-        this.dy = 4;
+        this.dy = 2;
         this.isGood = isGood;
         //TODO: Add width and height
             

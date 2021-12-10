@@ -9,11 +9,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     outline: 1px solid red;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-#start-game {
+#game-container {
     width: auto;
+    margin-top: 100px;
     display: flex;
     justify-content: space-between;
 }
@@ -23,16 +25,51 @@ body {
     padding: 50px;
     outline: 1px solid red;
 }
+#instructions-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    outline: 1px solid red;
+}
+#instructions-text {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.btn {
+    text-decoration: none;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 3px solid #000;
+    border-radius: 5px;
+    background-color: #1ace3e;
+    box-shadow: 2px 5px 10px;
+    cursor: pointer;
+    margin-bottom: 50px;
+}
+.btn:hover {
+    background-color: #63ff2f;
+}
 
 canvas {
-    border: 1px solid red;
-    background-color: lightblue;
     
+    background-image: url("../images/game-background.png");
+    background-size: cover;
+    background-position: center;
 }
 #game-info {
     display: flex;
     flex-direction: column;
     padding: 50px;
     outline: 1px solid red;
-
+    
 }
+
+
+
+.hide-btn {
+    display: none;
+}
+
+
