@@ -13,20 +13,34 @@ class Player {
         //this.img = new Image();
         //this.img.src = "images/player.png";
     }
+    moveKey(event) {
+        // Stop the default behavior (moving the screen to the left/up/right/down)
+        event.preventDefault();
+        //TODO: Create in player
+        // React based on the key pressed
+        switch (event.keyCode) {
+        case 37:
+            this.moveLeft(); //left
+            break;
+        case 39:
+            this.moveRight(); //right
+            break;
+        }
+    }
     moveLeft(){
 
-        if (this.x - this.radius < 1) {
-            return;
+        if (this.x - this.radius > 1) {
+
+            this.x -= this.dx;
         }
-        this.x -= this.dx;
-        
+
     }
     moveRight(){
 
-        if (this.x + this.radius > canvas.width - 1){
-            return;
+        if (this.x + this.radius < canvas.width - 1){
+
+            this.x += this.dx;
         }
-        this.x += this.dx;
         
     }
     drawPlayer(){
@@ -46,62 +60,57 @@ class Player {
         let sumOfRadius = this.radius + currentGame.obstacles[i].radius;
 
         // removes the obstacle from the array after colision
-        if (distance < sumOfRadius || distance === sumOfRadius) {
-
-            // console.log("colision");
-            // console.log(obstacle.isGood);
+        if (distance < sumOfRadius) {
 
             if (obstacle.isGood) {
 
-                this.increaseHealth(); //win 2 points when hit a goodObstacle
+                this.updateHealth(); //win 2 points when hitting a goodObstacle
 
             } else {
 
-                this.decreaseHealth(-5); //loose 5 points when the hit badObstacle 
+                this.updateHealth(7); //loose 7 points when hitting a badObstacle 
             }
-            currentGame.obstacles.splice(i,1);
-
+            this.removeObstacle(i);
             
-            
-
         } 
 
-        // removes obstacle from the array in case theres no colision and is out of the canvas
+        //removes obstacle from the array when theres no colision and obstacle is out of the canvas
         if (obstacle.y > canvas.height + (this.radius * 2)) {
 
             if(obstacle.isGood && this.health > 0) {
 
-                this.decreaseHealth(-5); //loose 5 points when miss a goodObstacle
+                this.updateHealth(5); //loose 5 points of health when a goodObstacle is missed
             }
-            // console.log("no collision");
-            currentGame.obstacles.splice(i,1);
-            
+        
+            this.removeObstacle(i); 
         }        
     }
-    increaseHealth() {
 
-        let playerHealth = document.querySelector('#score');
-
-        if(this.health < 100 && this.health > 97) {
-
-            this.health = 100;
-
-            playerHealth.innerHTML = this.health.toString();
-        } 
-        if (this.health < 95 && this.health > 0) {
-
-            this.health += 2; 
-
-            playerHealth.innerHTML = this.health.toString();
-        }
-    }
-    decreaseHealth(x) {
-
-        let playerHealth = document.querySelector('#score');
-
-        this.health += x;
+    removeObstacle(index) {
         
-        playerHealth.innerHTML = this.health.toString();
+        currentGame.obstacles.splice(index,1);
+
+    }
+    
+    updateHealth(damage) {
+
+        let playerHealth = document.querySelector('#player-health');
+
+        if (damage) {
+
+            this.health -= damage;
+            playerHealth.innerHTML = 'Health: '+ this.health.toString();
+        } else {
+
+            if (this.health < 100 && this.health > 0) {
+
+                this.health += 2; 
+    
+                playerHealth.innerHTML = 'Health: '+ this.health.toString();
+            
+            }
+        }
+        
     }
 
 }

@@ -9,12 +9,12 @@ class Obstacles {
         //this.dx = Math.floor(Math.random() * canvas.width);
         this.radius = Math.floor(Math.random() * 40) + 20;
         // speed and reset properties
-        this.dy = 1.5;
+        this.dy = 4;
         this.isGood = isGood;
+        //TODO: Add width and height
             
     }
     drawObstacle(){
-        
         ctx.beginPath();
         if (this.isGood){
             ctx.strokeStyle = 'green';
@@ -26,6 +26,7 @@ class Obstacles {
         ctx.stroke();
         ctx.closePath();
         
+        //TODO: create move method
         this.y += this.dy;         
     }
 
