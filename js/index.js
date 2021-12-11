@@ -4,11 +4,11 @@ let ctx = canvas.getContext('2d');
 let currentGame;
 let highScore = 0;
 let player;
-
+let choosenTurtle = "";
 function startGame() {
 
   currentGame = new Game();
-  player = new Player();
+  player = new Player(choosenTurtle);
   document.querySelector('#btn-start').classList.toggle('hide-btn');
   document.querySelector('#btn-restart').classList.toggle('hide-btn');
   document.querySelector('#player-health').innerHTML = 'Health: ' + player.health;
@@ -27,20 +27,19 @@ function clearCanvas() {
 
 function updateCanvas() {
 
-  
   clearCanvas();
   let currentObstacle;
   currentGame.obstaclesFrequency++;
 
   // updates de score/seconds to later use to update the highscore
-  if (currentGame.obstaclesFrequency % 140 === 0) {
+  if (currentGame.obstaclesFrequency % 60 === 0) {
 
     currentGame.score++;
     document.querySelector('#player-highscore').innerHTML = 'Current score: ' + currentGame.score;
   
   }
-  // push a new obstacle if the obstacleNumber is divisible by 5
-  if (currentGame.obstaclesFrequency % 5 === 0 && currentGame.obstacles.length <= currentGame.numberOfObstacles) {
+  // push a new obstacle if the obstacleNumber is divisible by 50
+  if (currentGame.obstaclesFrequency % 25 === 0 && currentGame.obstacles.length <= currentGame.numberOfObstacles) {
 
     //Assign my new obstacle to my obstaclesArray
     currentObstacle = new Obstacles(Math.random() * canvas.width - 20, Math.floor(Math.random() * -35), currentGame.isGood[Math.floor(Math.random() * 2)]);
@@ -59,7 +58,7 @@ function updateCanvas() {
 
   if (player.health < 1) {
 
-    // display higscore
+    
     document.querySelector('#player-health').innerHTML = 'Health: ' + 0;
     document.querySelector('#player-highscore').innerHTML = 'Your final score was: ' + currentGame.score;
     gameOver();
@@ -77,7 +76,8 @@ function gameOver() {
 
 window.onload = () => {
   document.querySelector('#btn-start').onclick = () => {
-  
+    
+    canvas.classList.add('canvas-background');
     startGame();
     
   };
@@ -88,3 +88,12 @@ window.addEventListener('keydown', (event) => {
 });
 
 document.querySelector('#btn-restart').addEventListener('click', restartGame);
+
+// selection of the turtle to play
+document.querySelectorAll('.turtles').forEach((element) => {
+
+  element.addEventListener('click', (e) => {
+    choosenTurtle = e.target.src;
+  }); 
+});
+

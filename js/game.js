@@ -2,6 +2,7 @@
 
 class Game {
     constructor() {
+        
         this.obstacles = [];
         this.score = 0;
         this.obstaclesFrequency = 0;
@@ -13,8 +14,8 @@ class Game {
         // this.gameOver = false;
     }
     drawGameOver(){
+
         ctx.font = '48px serif';
-        
         ctx.fillText('GAME OVER', 210, 250);
 
     }

@@ -46,27 +46,39 @@ body {
     background-color: #1ace3e;
     box-shadow: 2px 5px 10px;
     cursor: pointer;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 .btn:hover {
     background-color: #63ff2f;
 }
-
+#game-info {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 50px;
+    outline: 1px solid red;
+    
+}
+#player-select {
+    display: flex;
+    outline: 1px solid red;
+}
+#player-select .turtles img{
+    width: 50px;
+    height: auto;
+}
 canvas {
+    display: flex;
+    background-color: grey;
+    border: 20px solid blue;
+}
+/********************** CLASSES *****************************/
+
+.canvas-background {
     
     background-image: url("../images/game-background.png");
     background-size: cover;
     background-position: center;
 }
-#game-info {
-    display: flex;
-    flex-direction: column;
-    padding: 50px;
-    outline: 1px solid red;
-    
-}
-
-
 
 .hide-btn {
     display: none;

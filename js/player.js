@@ -2,16 +2,18 @@
 
 class Player {
 
-    constructor(){
+    constructor(srcImg){
 
         this.x = canvas.width / 2;
         this.y = canvas.height - 35;
         this.dx = 35;
         this.radius = 35;
         this.health = 100;
-
-        //this.img = new Image();
-        //this.img.src = "images/player.png";
+        this.img = new Image();
+        this.img.src = srcImg;
+        
+        this.width = 67;
+        this.height = 67;
     }
     moveKey(event) {
         // Stop the default behavior (moving the screen to the left/up/right/down)
@@ -49,6 +51,8 @@ class Player {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.fill();
         ctx.closePath();  
+        
+        ctx.drawImage(this.img, this.x - this.radius + 2, this.y - this.radius + 1, this.width , this.height);
 
     }
     detectCollision(obstacle, i) {
@@ -68,7 +72,7 @@ class Player {
 
             } else {
 
-                this.updateHealth(7); //loose 7 points when hitting a badObstacle 
+                this.updateHealth(10); //loose 10 points when hitting a badObstacle 
             }
             this.removeObstacle(i);
             
@@ -79,7 +83,7 @@ class Player {
 
             if(obstacle.isGood && this.health > 0) {
 
-                this.updateHealth(5); //loose 5 points of health when a goodObstacle is missed
+                this.updateHealth(7); //loose 7 points of health when a goodObstacle is missed
             }
         
             this.removeObstacle(i); 
