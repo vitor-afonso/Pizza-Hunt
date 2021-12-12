@@ -109,8 +109,10 @@ class Player {
             if (this.health < 100 && this.health > 0) {
 
                 this.health += 2; 
-    
+
+                currentGame.score++;
                 playerHealth.innerHTML = 'Health: '+ this.health.toString();
+                document.querySelector('#player-highscore').innerHTML = 'Pizza score: ' + currentGame.score;
             
             }
         }

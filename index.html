@@ -13,27 +13,32 @@
 
         <div id="instructions-info">
 
-            <h3 id="instructions-title">Ironhack Project 1 - Game</h3>
+            <h3 id="instructions-title">PizzaHunt</h3>
             <p id="instructions-text">This is the instructions to play the game.</p>
             <a id="btn-start" href="#" class="btn">Start Game</a>
             <a id="btn-restart" href="#" class="btn hide-btn">Restart</a>
 
             <div id="game-info">
                 <div id="player-health" class="info">Health: 0</div>
-                <div id="player-highscore" class="info">Current score: 0</div>
+                <div id="player-highscore" class="info">Pizza score: 0</div>
             </div>
+            
+            
 
         </div>
 
 
-        <canvas width="700" height="500">
-
+        <canvas class="canvas-leonardo" width="700" height="500">
+            
             <div id="player-select">
+
                 <div id="leonardo" class="turtles"><img src="images/leonardo.png" alt="Leonardo"></div>
                 <div id="donatello" class="turtles"><img src="images/donatello.png" alt="Donatello"></div>
                 <div id="rafaello" class="turtles"><img src="images/rafaello.png" alt="Rafaello"></div>
                 <div id="miguel-angelo" class="turtles"><img src="images/miguel-angelo.png" alt="Miguel Angelo"></div>
+
             </div>
+            
             
         </canvas>
 
@@ -43,7 +48,7 @@
 
     
     
-
+    <script src="js/choosePlayer.js"></script>
     <script src="js/player.js"></script>
     <script src="js/obstacle.js"></script>
     <script src="js/game.js"></script>

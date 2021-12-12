@@ -12,6 +12,10 @@ body {
     justify-content: start;
     outline: 1px solid red;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    background-image: url("../images/page-skin.jpeg");
+    background-size: cover;
+    background-position: center;
 }
 #game-container {
     width: auto;
@@ -58,28 +62,43 @@ body {
     outline: 1px solid red;
     
 }
-#player-select {
-    display: flex;
-    outline: 1px solid red;
-}
-#player-select .turtles img{
-    width: 50px;
-    height: auto;
-}
-canvas {
-    display: flex;
-    background-color: grey;
-    border: 20px solid blue;
-}
+
 /********************** CLASSES *****************************/
 
+.start-game {
+    
+    background-image: url("../images/page-skin.jpeg");
+    background-size: cover;
+    background-position: center;
+}
+.game-over {
+
+    background-image: url("../images/game-over-skin.jpeg");
+    background-size: cover;
+    background-position: center;
+}
 .canvas-background {
     
     background-image: url("../images/game-background.png");
     background-size: cover;
     background-position: center;
 }
-
+.canvas-leonardo {
+    border: 10px solid #0000ff;
+    background-color: rgba(94, 112, 210, 0.5);
+}
+.canvas-donatello {
+    border: 10px solid #8800ff;
+    background-color: rgba(186, 64, 227, 0.317);
+}
+.canvas-rafaello {
+    border: 10px solid #ff0000;
+    background-color: rgba(227, 64, 64, 0.317);
+}
+.canvas-miguel-angelo {
+    border: 10px solid #ff8c00;
+    background-color: rgba(227, 167, 64, 0.317);
+}
 .hide-btn {
     display: none;
 }
