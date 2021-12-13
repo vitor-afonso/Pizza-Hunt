@@ -8,16 +8,15 @@ class Game {
         this.obstaclesFrequency = 0;
         this.isGood = [true, false];
         this.numberOfObstacles = 5;
-        
-        
-        // this.healthTimer = setInterval(player.decreaseHealth(1), 1000);
-        // this.animationId = null;
-        // this.gameOver = false;
+        this.animationFrameId = null;
     }
-    drawGameOver(){
+    drawGameOver() {
 
         ctx.font = '48px serif';
         ctx.fillText('GAME OVER', 210, 250);
 
+        ctx.font = '30px serif';
+        ctx.fillStyle = '#FFF';
+        ctx.fillText('You managed to catch ' + this.score + ' pizzas', 190, 310);
     }
 }

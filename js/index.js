@@ -29,7 +29,6 @@ function startSelectPlayers() {
 
 function startGame() {
 
-  
   if (choosenTurtle){
 
     currentGame = new Game();
@@ -37,25 +36,29 @@ function startGame() {
     document.querySelector('#btn-start').classList.toggle('hide-btn');
     document.querySelector('#btn-restart').classList.toggle('hide-btn');
     canvas.classList.add('canvas-background');
-    document.querySelector('#player-health').innerHTML = 'Health: ' + player.health;
-    document.querySelector('#player-highscore').innerHTML = 'Pizza score: ' + currentGame.score;
+
     updateCanvas();
 
   } else {
+
     alert('Please select your player.');
   }
 }
-function restartGame() {
-  
-  location.reload();
-}
 
 function clearCanvas() {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 }
+
 function updateScore(){
   currentGame.score++;
-  document.querySelector('#player-highscore').innerHTML = 'Pizza score: ' + currentGame.score;
+}
+
+function updateScreenScore(playerHealth) {
+
+  ctx.font = '30px serif';
+  ctx.fillStyle = '#FFF';
+  ctx.fillText('Health: ' + playerHealth, 10, 50);
+  ctx.fillText('Pizza score: ' + currentGame.score, 10, 80);
 }
 
 function updateCanvas() {
@@ -79,44 +82,43 @@ function updateCanvas() {
   });
 
   player.drawPlayer();
-  
-  currentGame.animationFrameId = requestAnimationFrame(updateCanvas);
 
   if (player.health < 1) {
 
-    
-    document.querySelector('#player-health').innerHTML = 'Health: ' + 0;
-    if (currentGame.score === 1) {
-
-      document.querySelector('#player-highscore').innerHTML = 'You managed to catch ' + currentGame.score + ' pizza.';
-
-    } else {
-
-      document.querySelector('#player-highscore').innerHTML = 'You managed to catch ' + currentGame.score + ' pizzas.';
     gameOver();
-    }
     
-  }
+  } else {
 
+    updateScreenScore(player.health);
+    
+    currentGame.animationFrameId = requestAnimationFrame(updateCanvas);
+  }
 }
 
 function gameOver() {
-  
+
+  updateScreenScore('0');
   currentGame.drawGameOver();
-  cancelAnimationFrame(currentGame.animationFrameId);
+  // cancelAnimationFrame(currentGame.animationFrameId);
   document.querySelector('body').classList.remove('start-game');
   document.querySelector('body').classList.add('game-over');
   
 }
 
+function restartGame() {
+  
+  location.reload();
+}
 
 window.onload = () => {
 
   document.querySelector('body').classList.add('start');
+
   startSelectPlayers();
   
   canvas.addEventListener('click', (event) => {
 
+    // controlles the click on canvas when choosing player
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -130,9 +132,12 @@ window.onload = () => {
         canvas.classList.remove('canvas-rafaello');
         canvas.classList.remove('canvas-miguel-angelo');
         canvas.classList.add('canvas-leonardo');
+      } else {
+        canvas.classList.add('canvas-leonardo');
       }
       choosenTurtle = 'images/leonardo.png';
     }
+    
     if (donatello.playerClicked(x, y)) {
       if (canvas.classList.contains('canvas-leonardo') || canvas.classList.contains('canvas-rafaello') || canvas.classList.contains('canvas-miguel-angelo')) {
         
@@ -140,25 +145,37 @@ window.onload = () => {
         canvas.classList.remove('canvas-rafaello');
         canvas.classList.remove('canvas-miguel-angelo');
         canvas.classList.add('canvas-donatello');
+      } else {
+        canvas.classList.add('canvas-donatello');
       }
       choosenTurtle = '../images/donatello.png';
     }
+
     if (rafaello.playerClicked(x, y)) {
+
       if (canvas.classList.contains('canvas-donatello') || canvas.classList.contains('canvas-leonardo') || canvas.classList.contains('canvas-miguel-angelo')) {
         
         canvas.classList.remove('canvas-donatello');
         canvas.classList.remove('canvas-leonardo');
         canvas.classList.remove('canvas-miguel-angelo');
         canvas.classList.add('canvas-rafaello');
+
+      } else {
+        canvas.classList.add('canvas-rafaello');
       }
       choosenTurtle = '../images/rafaello.png';
     }
+
     if (miguelAngelo.playerClicked(x, y)) {
+
       if (canvas.classList.contains('canvas-donatello') || canvas.classList.contains('canvas-rafaello') || canvas.classList.contains('canvas-leonardo')) {
         
         canvas.classList.remove('canvas-donatello');
         canvas.classList.remove('canvas-rafaello');
         canvas.classList.remove('canvas-leonardo');
+        canvas.classList.add('canvas-miguel-angelo');
+
+      } else {
         canvas.classList.add('canvas-miguel-angelo');
       }
       choosenTurtle = '../images/miguel-angelo.png';
@@ -171,13 +188,17 @@ window.onload = () => {
     startGame();
     
   };
+  document.querySelector('#btn-restart').onclick = () => {
+
+    restartGame();
+    
+  };
 
 };
 
 window.addEventListener('keydown', (event) => {
-    player.moveKey(event);
+  player.moveKey(event);
 });
 
-document.querySelector('#btn-restart').addEventListener('click', restartGame);
 
 

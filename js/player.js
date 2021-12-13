@@ -11,7 +11,6 @@ class Player {
         this.health = 100;
         this.img = new Image();
         this.img.src = srcImg;
-        
         this.width = 67;
         this.height = 67;
     }
@@ -48,6 +47,7 @@ class Player {
     drawPlayer(){
 
         ctx.beginPath();
+        ctx.fillStyle = "black";
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.fill();
         ctx.closePath();  
@@ -98,22 +98,16 @@ class Player {
     
     updateHealth(damage) {
 
-        let playerHealth = document.querySelector('#player-health');
-
         if (damage) {
 
             this.health -= damage;
-            playerHealth.innerHTML = 'Health: '+ this.health.toString();
+
         } else {
 
             if (this.health < 100 && this.health > 0) {
 
                 this.health += 2; 
-
                 currentGame.score++;
-                playerHealth.innerHTML = 'Health: '+ this.health.toString();
-                document.querySelector('#player-highscore').innerHTML = 'Pizza score: ' + currentGame.score;
-            
             }
         }
         

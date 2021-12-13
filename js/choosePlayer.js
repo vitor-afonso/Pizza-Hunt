@@ -13,7 +13,13 @@ class ChoosePlayer {
         this.imgY = canvas.height / 2 - 50;
         
     }
-    drawClickArea(){
+    drawClickArea() {
+
+        ctx.beginPath();
+        ctx.fillStyle = '#FFF';
+        ctx.font = '40px Arial';
+        ctx.fillText('Select Player', 230, 125);
+        ctx.closePath();
 
         ctx.beginPath();
         // ctx.lineWidth = 2;
@@ -39,6 +45,14 @@ class ChoosePlayer {
             
             return false;
         }
+    }
+    addCanvasClick(){
+        
+    }
+    removeCanvasClick() {
+
+
+
     }
 }
 

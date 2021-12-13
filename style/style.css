@@ -26,18 +26,19 @@ body {
 #instructions-info {
     display: flex;
     flex-direction: column;
-    padding: 50px;
-    outline: 1px solid red;
-}
-#instructions-info {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    outline: 1px solid red;
+    justify-content: center;
+    color: #FFF;
+    padding: 0 25px;
+
 }
 #instructions-text {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    max-width: 450px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-shadow: 1px 1px 1px #000000;
+    text-align: center;
+    line-height: 1.4rem;
 }
 .btn {
     text-decoration: none;
@@ -50,7 +51,6 @@ body {
     background-color: #1ace3e;
     box-shadow: 2px 5px 10px;
     cursor: pointer;
-    margin-bottom: 25px;
 }
 .btn:hover {
     background-color: #63ff2f;
@@ -58,11 +58,15 @@ body {
 #game-info {
     display: flex;
     flex-direction: column;
-    padding: 25px 50px;
-    outline: 1px solid red;
+    padding: 0 25px 0 25px;
+    font-size: 20px;
+    font-weight: 600;
     
 }
-
+canvas {
+    border: 10px solid #000000;
+    background-color: rgba(157, 157, 157, 0.3);
+}
 /********************** CLASSES *****************************/
 
 .start-game {
@@ -83,6 +87,7 @@ body {
     background-size: cover;
     background-position: center;
 }
+
 .canvas-leonardo {
     border: 10px solid #0000ff;
     background-color: rgba(94, 112, 210, 0.5);
