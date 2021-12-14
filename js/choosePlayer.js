@@ -9,7 +9,7 @@ class ChoosePlayer {
         this.radius = 50;
         this.name = name
         this.img = new Image();
-        this.img.src = `images/${this.name}.png`;
+        this.img.src = `./images/${this.name}.png`;
         this.imgX = imgX;
         this.imgY = canvas.height / 2 - 50;
         
