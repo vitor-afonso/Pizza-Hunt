@@ -67,11 +67,12 @@ class Player {
         if (distance < sumOfRadius) {
 
             if (obstacle.isGood) {
-
+                sound.pizzaHit.play();
                 this.updateHealth(); //win 2 points when hitting a goodObstacle
 
             } else {
 
+                sound.shredderHit.play();
                 this.updateHealth(10); //loose 10 points when hitting a badObstacle 
             }
             this.removeObstacle(i);

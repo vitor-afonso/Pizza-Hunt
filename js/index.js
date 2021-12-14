@@ -3,46 +3,73 @@ let canvas = document.querySelector('canvas');
 let ctx = canvas.getContext('2d');
 let currentGame;
 let highScore = 0;
+let players = [];
 let player;
+
 let leonardo;
 let donatello;
 let rafaello;
 let miguelAngelo;
 let choosenTurtle = ""; //used to send src of image to set in the player
 
+let sound;
+
 
 function startSelectPlayers() {
 
-  leonardo = new ChoosePlayer(150, 'images/leonardo.png', 100);
+  leonardo = new ChoosePlayer(150, 'leonardo', 100);
+  players.push(leonardo);
+  donatello = new ChoosePlayer(275, 'donatello', 225);
+  players.push(donatello);
+  rafaello = new ChoosePlayer(425, 'rafaello', 375);
+  players.push(rafaello);
+  miguelAngelo = new ChoosePlayer(550, 'miguel-angelo', 500);
+  players.push(miguelAngelo);
+  
+  players.forEach(p => p.drawClickArea());
 
-  donatello = new ChoosePlayer(275, 'images/donatello.png', 225);
+}
 
-  rafaello = new ChoosePlayer(425, 'images/rafaello.png', 375);
+function handleEventListener(event) {
+  // controlles the click on canvas when choosing player
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
 
-  miguelAngelo = new ChoosePlayer(550, 'images/miguel-angelo.png', 500);
+  let clickedPlayer = players.reduce((p,p2) => p2.playerClicked(x, y) ? p = p2 : p = p );
 
-  leonardo.drawClickArea();
-  donatello.drawClickArea();
-  rafaello.drawClickArea();
-  miguelAngelo.drawClickArea();
+  canvas.classList.remove('canvas-donatello');
+  canvas.classList.remove('canvas-rafaello');
+  canvas.classList.remove('canvas-miguel-angelo');
+  canvas.classList.remove('canvas-leonardo');
+
+  if(clickedPlayer){
+    
+    canvas.classList.add(`canvas-${clickedPlayer.name}`);
+    choosenTurtle = clickedPlayer.img.src;
+  }
+
 }
 
 function startGame() {
 
-  if (choosenTurtle){
+  currentGame = new Game();
+  sound = new Sounds();
+  player = new Player(choosenTurtle);
+  canvas.removeEventListener("click",handleEventListener);
+  document.querySelector('#btn-start').classList.toggle('hide-btn');
+  document.querySelector('#btn-restart').classList.toggle('hide-btn');
+  canvas.classList.add('canvas-background');
 
-    currentGame = new Game();
-    player = new Player(choosenTurtle);
-    document.querySelector('#btn-start').classList.toggle('hide-btn');
-    document.querySelector('#btn-restart').classList.toggle('hide-btn');
-    canvas.classList.add('canvas-background');
-
-    updateCanvas();
-
-  } else {
-
-    alert('Please select your player.');
-  }
+  sound.gameStart.volume = 0.3;
+  sound.shredderHit.volume = 1;
+  sound.gameOver.volume = 0.3;
+  sound.pizzaHit.volume = 0.5;
+  sound.gameStart.play();
+  
+  
+  updateCanvas();
+  
 }
 
 function clearCanvas() {
@@ -84,8 +111,10 @@ function updateCanvas() {
   player.drawPlayer();
 
   if (player.health < 1) {
-
+    sound.gameStart.pause();
+    sound.gameOver.play();
     gameOver();
+    cancelAnimationFrame(currentGame.animationFrameId);
     
   } else {
 
@@ -99,7 +128,7 @@ function gameOver() {
 
   updateScreenScore('0');
   currentGame.drawGameOver();
-  // cancelAnimationFrame(currentGame.animationFrameId);
+  
   document.querySelector('body').classList.remove('start-game');
   document.querySelector('body').classList.add('game-over');
   
@@ -116,77 +145,19 @@ window.onload = () => {
 
   startSelectPlayers();
   
-  canvas.addEventListener('click', (event) => {
-
-    // controlles the click on canvas when choosing player
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    if(leonardo.playerClicked(x, y)) {
-      
-      
-      if (canvas.classList.contains('canvas-donatello') || canvas.classList.contains('canvas-rafaello') || canvas.classList.contains('canvas-miguel-angelo')) {
-        
-        canvas.classList.remove('canvas-donatello');
-        canvas.classList.remove('canvas-rafaello');
-        canvas.classList.remove('canvas-miguel-angelo');
-        canvas.classList.add('canvas-leonardo');
-      } else {
-        canvas.classList.add('canvas-leonardo');
-      }
-      choosenTurtle = 'images/leonardo.png';
-    }
-    
-    if (donatello.playerClicked(x, y)) {
-      if (canvas.classList.contains('canvas-leonardo') || canvas.classList.contains('canvas-rafaello') || canvas.classList.contains('canvas-miguel-angelo')) {
-        
-        canvas.classList.remove('canvas-leonardo');
-        canvas.classList.remove('canvas-rafaello');
-        canvas.classList.remove('canvas-miguel-angelo');
-        canvas.classList.add('canvas-donatello');
-      } else {
-        canvas.classList.add('canvas-donatello');
-      }
-      choosenTurtle = '../images/donatello.png';
-    }
-
-    if (rafaello.playerClicked(x, y)) {
-
-      if (canvas.classList.contains('canvas-donatello') || canvas.classList.contains('canvas-leonardo') || canvas.classList.contains('canvas-miguel-angelo')) {
-        
-        canvas.classList.remove('canvas-donatello');
-        canvas.classList.remove('canvas-leonardo');
-        canvas.classList.remove('canvas-miguel-angelo');
-        canvas.classList.add('canvas-rafaello');
-
-      } else {
-        canvas.classList.add('canvas-rafaello');
-      }
-      choosenTurtle = '../images/rafaello.png';
-    }
-
-    if (miguelAngelo.playerClicked(x, y)) {
-
-      if (canvas.classList.contains('canvas-donatello') || canvas.classList.contains('canvas-rafaello') || canvas.classList.contains('canvas-leonardo')) {
-        
-        canvas.classList.remove('canvas-donatello');
-        canvas.classList.remove('canvas-rafaello');
-        canvas.classList.remove('canvas-leonardo');
-        canvas.classList.add('canvas-miguel-angelo');
-
-      } else {
-        canvas.classList.add('canvas-miguel-angelo');
-      }
-      choosenTurtle = '../images/miguel-angelo.png';
-    }
-    
-  });
+  canvas.addEventListener('click', handleEventListener);
 
   document.querySelector('#btn-start').onclick = () => {
 
-    startGame();
-    
+    if (choosenTurtle) {
+
+      startGame();
+
+    } else {
+
+      alert('Please select your player.');
+    }
+  
   };
   document.querySelector('#btn-restart').onclick = () => {
 

@@ -2,13 +2,14 @@
 
 class ChoosePlayer {
 
-    constructor(x, srcImg, imgX) {
+    constructor(x, name, imgX) {
         
         this.x = x;
         this.y = canvas.height / 2;
         this.radius = 50;
+        this.name = name
         this.img = new Image();
-        this.img.src = srcImg;
+        this.img.src = `images/${this.name}.png`;
         this.imgX = imgX;
         this.imgY = canvas.height / 2 - 50;
         
@@ -26,8 +27,10 @@ class ChoosePlayer {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.stroke();
         ctx.closePath();
-
+        console.log("this.img, this.imgX, this.imgY");
+        console.log(this.img, this.imgX, this.imgY);
         ctx.drawImage(this.img, this.imgX, this.imgY, 100, 100);
+
 
     }
     playerClicked(xMouse, yMouse) {
@@ -37,22 +40,8 @@ class ChoosePlayer {
       
         let distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance < this.radius) {
-
-            return true;
-
-        } else {
-            
-            return false;
-        }
+        return distance < this.radius ? true : false;
     }
-    addCanvasClick(){
-        
-    }
-    removeCanvasClick() {
-
-
-
-    }
+    
 }
 

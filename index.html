@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 1 - Game</title>
     <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" href="images/donatello.png">
 </head>
 <body>
     
@@ -20,27 +21,28 @@
 
         </div>
 
-
         <canvas class="" width="700" height="500">
             
             <div id="player-select">
 
-                <div id="leonardo" class="turtles"><img src="images/leonardo.png" alt="Leonardo"></div>
-                <div id="donatello" class="turtles"><img src="images/donatello.png" alt="Donatello"></div>
-                <div id="rafaello" class="turtles"><img src="images/rafaello.png" alt="Rafaello"></div>
-                <div id="miguel-angelo" class="turtles"><img src="images/miguel-angelo.png" alt="Miguel Angelo"></div>
+                <div id="leonardo" class="turtles"><img src="./images/leonardo.png" alt="Leonardo"></div>
+                <div id="donatello" class="turtles"><img src="./images/donatello.png" alt="Donatello"></div>
+                <div id="rafaello" class="turtles"><img src="./images/rafaello.png" alt="Rafaello"></div>
+                <div id="miguel-angelo" class="turtles"><img src="./images/miguel-angelo.png" alt="Miguel Angelo"></div>
 
             </div>
             
-            
         </canvas>
 
-        
+        <audio id="game-audio" src="audio/ninjaturtles-instrumental.wav" preload="auto"></audio>
+        <audio id="shredderHit" src="audio/shredder-hit.mp3" preload="auto"></audio>
+        <audio id="pizzaHit" src="audio/pizza-hit1.wav" preload="auto"></audio>
+        <audio id="game-over" src="audio/game-over.mp3" preload="auto"></audio>
 
     </section>
 
     
-    
+    <script src="js/sounds.js"></script>
     <script src="js/choosePlayer.js"></script>
     <script src="js/player.js"></script>
     <script src="js/obstacle.js"></script>
