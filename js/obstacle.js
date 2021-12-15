@@ -18,10 +18,10 @@ class Obstacles {
     setImage() {
 
         if(this.isGood) {
-            this.img.src = "/images/pizza.png";
+            this.img.src = "./images/pizza.png";
             ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius - 1, this.width, this.height);
         } else {
-            this.img.src = "/images/shreder.png";
+            this.img.src = "./images/shreder.png";
             ctx.drawImage(this.img, this.x - this.radius, this.y - this.radius - 1, this.width, this.height);
         }
     }

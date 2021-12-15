@@ -7,7 +7,7 @@ class ChoosePlayer {
         this.x = x;
         this.y = canvas.height / 2;
         this.radius = 50;
-        this.name = name
+        this.name = name;
         this.img = new Image();
         this.img.src = `./images/${this.name}.png`;
         this.imgX = imgX;
