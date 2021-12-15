@@ -19,7 +19,7 @@ Once back in the 90's all games were quite simple and had these retro sound effe
 - Create the GitHub repository & ReadMe
 - Build the foundation files of HTML, CSS and JS
 - Create the different JS Classes in order to be OOP
-- Implement collisions system in canvas
+- Implement collisions system
 - Get and add character, obstacles and background images
 - Design the game screen
 - Add audio to game-start and collisions
