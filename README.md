@@ -4,7 +4,7 @@ Pizza Hunt is my first Ironhack Web Dev bootcamp project. With this game i am su
 
 ## Instructions
 
-Pizza Hunt is a game where you have to catch as many pizzas as you can and avoid being hit by the vilan Shredder. To play it you use the left and right arrow keys in your keyboard.
+Pizza Hunt is a game where you have to catch as many pizzas as you can and avoid being hit by the villain Shredder. To play it you use the left and right arrow keys in your keyboard.
 
 ### About the theme
 
@@ -13,6 +13,8 @@ The theme of the game being the Ninja Turtles is due to my childwood where i rem
 ### What i wanted to transmit
 
 Once back in the 90's all games were quite simple and had these retro sound effects that would make everything feel more emersive, i wanted to see if i could replicate something similar that back in the days would make me spend all my coins to play it.
+
+![alt text](https://github.com/[vitor-afonso]/[project-1]/blob/[master]/images/game-screenshot.png?raw=true)
  
 ### Steps to make it
 

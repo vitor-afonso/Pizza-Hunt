@@ -9,6 +9,11 @@ class Game {
         this.isGood = [true, false];
         this.numberOfObstacles = 5;
         this.animationFrameId = null;
+
+        this.gameStart = document.querySelector('#game-audio');
+        this.gameOver = document.querySelector('#game-over');
+        this.shredderHit = document.querySelector('#shredderHit');
+        this.pizzaHit = document.querySelector('#pizzaHit');
     }
     drawGameOver() {
 

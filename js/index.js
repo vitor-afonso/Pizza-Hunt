@@ -61,11 +61,11 @@ function startGame() {
   document.querySelector('#btn-restart').classList.toggle('hide-btn');
   canvas.classList.add('canvas-background');
 
-  sound.gameStart.volume = 0.3;
-  sound.shredderHit.volume = 1;
-  sound.gameOver.volume = 0.3;
-  sound.pizzaHit.volume = 0.5;
-  sound.gameStart.play();
+  currentGame.gameStart.volume = 0.3;
+  currentGame.shredderHit.volume = 1;
+  currentGame.gameOver.volume = 0.3;
+  currentGame.pizzaHit.volume = 0.5;
+  currentGame.gameStart.play();
   
   
   updateCanvas();
@@ -111,8 +111,8 @@ function updateCanvas() {
   player.drawPlayer();
 
   if (player.health < 1) {
-    sound.gameStart.pause();
-    sound.gameOver.play();
+    currentGame.gameStart.pause();
+    currentGame.gameOver.play();
     gameOver();
     cancelAnimationFrame(currentGame.animationFrameId);
     
