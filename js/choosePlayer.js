@@ -27,8 +27,7 @@ class ChoosePlayer {
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         ctx.stroke();
         ctx.closePath();
-        console.log("this.img, this.imgX, this.imgY");
-        console.log(this.img, this.imgX, this.imgY);
+    
         ctx.drawImage(this.img, this.imgX, this.imgY, 100, 100);
 
 

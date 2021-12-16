@@ -54,7 +54,6 @@ function handleEventListener(event) {
 function startGame() {
 
   currentGame = new Game();
-  sound = new Sounds();
   player = new Player(choosenTurtle);
   canvas.removeEventListener("click",handleEventListener);
   document.querySelector('#btn-start').classList.toggle('hide-btn');
