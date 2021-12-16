@@ -14,7 +14,7 @@ The theme of the game being the Ninja Turtles is due to my childwood where i rem
 
 Once back in the 90's all games were quite simple and had these retro sound effects that would make everything feel more emersive, i wanted to see if i could replicate something similar that back in the days would make me spend all my coins to play it.
 
-![alt text](https://github.com/vitor-afonso/project-1/blob/master/images/game-screenshot.png?raw=true)
+![alt text](https://github.com/vitor-afonso/project-1/blob/master/images/game-screenshot1.png?raw=true)
  
 ### Steps to make it
 
