@@ -16,6 +16,7 @@ class Player {
     }
 
     moveKey(event) {
+        
         // Stop the default behavior (moving the screen to the left/up/right/down)
         event.preventDefault();
         

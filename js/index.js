@@ -1,4 +1,6 @@
 //jshint esversion:6
+
+
 let canvas = document.querySelector('canvas');
 let ctx = canvas.getContext('2d');
 let currentGame;
@@ -23,8 +25,12 @@ function setTurtleSrc(turtleId, turtleSrc) {
 
 function startGame() {
 
-  
   player = new Player(choosenTurtle);
+
+  window.addEventListener('keydown', (event) => {
+    player.moveKey(event);
+  });
+  
   document.querySelector('#btn-start').classList.toggle('hide-btn');
   document.querySelector('#btn-restart').classList.toggle('hide-btn');
   document.querySelector('#player-select').style.display = 'none';
@@ -40,10 +46,12 @@ function startGame() {
 }
 
 function clearCanvas() {
+
   ctx.clearRect(0,0,canvas.width,canvas.height);
 }
 
 function updateScore(){
+
   currentGame.score++;
 }
 
@@ -61,7 +69,7 @@ function updateCanvas() {
   let currentObstacle;
   currentGame.obstaclesFrequency++;
 
-  // push a new obstacle if the obstacleNumber is divisible by 50
+  // push a new obstacle if the obstacleNumber is divisible by 25
   if (currentGame.obstaclesFrequency % 25 === 0 && currentGame.obstacles.length <= currentGame.numberOfObstacles) {
 
     //Assign my new obstacle to my obstaclesArray
@@ -78,6 +86,7 @@ function updateCanvas() {
   player.drawPlayer();
 
   if (player.health < 1) {
+
     currentGame.gameStart.pause();
     currentGame.gameOver.play();
     gameOver();
@@ -86,7 +95,6 @@ function updateCanvas() {
   } else {
 
     updateScreenScore(player.health);
-    
     currentGame.animationFrameId = requestAnimationFrame(updateCanvas);
   }
 }
@@ -94,7 +102,13 @@ function updateCanvas() {
 function gameOver() {
 
   updateScreenScore('0');
+
+  currentGame.setHighScores();
   currentGame.drawGameOver();
+  currentGame.getHighScores();
+
+  document.querySelector('#instructions-text').style.display = 'none';
+  document.querySelector('#highscore-container').style.display = 'flex';
   
   document.querySelector('body').classList.remove('start-game');
   document.querySelector('body').classList.add('game-over');
@@ -104,6 +118,10 @@ function restartGame() {
   
   location.reload();
 }
+
+
+
+
 
 window.onload = () => {
 
@@ -115,9 +133,10 @@ window.onload = () => {
       setTurtleSrc(turtle.id, turtle.src);
     };
   });
+
   currentGame = new Game();
   currentGame.drawSelectTurtle();
-  
+
   document.querySelector('#btn-start').onclick = () => {
 
     if (choosenTurtle) {
@@ -135,10 +154,4 @@ window.onload = () => {
     restartGame();
   };
 };
-
-window.addEventListener('keydown', (event) => {
-  player.moveKey(event);
-});
-
-
 
