@@ -3,61 +3,31 @@ let canvas = document.querySelector('canvas');
 let ctx = canvas.getContext('2d');
 let currentGame;
 let highScore = 0;
-let players = [];
 let player;
+//used to send src of image to set in creation of player
+let choosenTurtle = ""; 
 
-let leonardo;
-let donatello;
-let rafaello;
-let miguelAngelo;
-let choosenTurtle = ""; //used to send src of image to set in the player
-
-let sound;
-
-
-function startSelectPlayers() {
-
-  leonardo = new ChoosePlayer(150, 'leonardo', 100);
-  players.push(leonardo);
-  donatello = new ChoosePlayer(275, 'donatello', 225);
-  players.push(donatello);
-  rafaello = new ChoosePlayer(425, 'rafaello', 375);
-  players.push(rafaello);
-  miguelAngelo = new ChoosePlayer(550, 'miguel-angelo', 500);
-  players.push(miguelAngelo);
-  
-  players.forEach(p => p.drawClickArea());
-
-}
-
-function handleEventListener(event) {
-  // controlles the click on canvas when choosing player
-  const rect = canvas.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-
-  let clickedPlayer = players.reduce((p,p2) => p2.playerClicked(x, y) ? p = p2 : p = p );
+function setTurtleSrc(turtleId, turtleSrc) {
 
   canvas.classList.remove('canvas-donatello');
   canvas.classList.remove('canvas-rafaello');
   canvas.classList.remove('canvas-miguel-angelo');
   canvas.classList.remove('canvas-leonardo');
 
-  if(clickedPlayer){
+  if(turtleId, turtleSrc){
     
-    canvas.classList.add(`canvas-${clickedPlayer.name}`);
-    choosenTurtle = clickedPlayer.img.src;
+    canvas.classList.add(`canvas-${turtleId}`);
+    choosenTurtle = turtleSrc;
   }
-
 }
 
 function startGame() {
 
-  currentGame = new Game();
+  
   player = new Player(choosenTurtle);
-  canvas.removeEventListener("click",handleEventListener);
   document.querySelector('#btn-start').classList.toggle('hide-btn');
   document.querySelector('#btn-restart').classList.toggle('hide-btn');
+  document.querySelector('#player-select').style.display = 'none';
   canvas.classList.add('canvas-background');
 
   currentGame.gameStart.volume = 0.3;
@@ -66,9 +36,7 @@ function startGame() {
   currentGame.pizzaHit.volume = 0.5;
   currentGame.gameStart.play();
   
-  
   updateCanvas();
-  
 }
 
 function clearCanvas() {
@@ -130,7 +98,6 @@ function gameOver() {
   
   document.querySelector('body').classList.remove('start-game');
   document.querySelector('body').classList.add('game-over');
-  
 }
 
 function restartGame() {
@@ -142,10 +109,15 @@ window.onload = () => {
 
   document.querySelector('body').classList.add('start');
 
-  startSelectPlayers();
-  
-  canvas.addEventListener('click', handleEventListener);
+  document.querySelectorAll('.turtles > img').forEach(turtle => {
 
+    turtle.onclick = () => {
+      setTurtleSrc(turtle.id, turtle.src);
+    };
+  });
+  currentGame = new Game();
+  currentGame.drawSelectTurtle();
+  
   document.querySelector('#btn-start').onclick = () => {
 
     if (choosenTurtle) {
@@ -156,14 +128,12 @@ window.onload = () => {
 
       alert('Please select your player.');
     }
-  
   };
+
   document.querySelector('#btn-restart').onclick = () => {
 
     restartGame();
-    
   };
-
 };
 
 window.addEventListener('keydown', (event) => {

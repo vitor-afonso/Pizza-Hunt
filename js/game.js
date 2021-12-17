@@ -14,7 +14,16 @@ class Game {
         this.gameOver = document.querySelector('#game-over');
         this.shredderHit = document.querySelector('#shredderHit');
         this.pizzaHit = document.querySelector('#pizzaHit');
+
+        this.players = [];
     }
+    drawSelectTurtle() {
+
+        ctx.font = '48px sans-serif';
+        ctx.fillStyle = '#FFF';
+        ctx.fillText('SELECT PLAYER', 160, 135);
+    }
+
     drawGameOver() {
 
         ctx.font = '48px serif';

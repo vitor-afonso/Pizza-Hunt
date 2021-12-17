@@ -14,6 +14,7 @@ class Player {
         this.width = 67;
         this.height = 67;
     }
+
     moveKey(event) {
         // Stop the default behavior (moving the screen to the left/up/right/down)
         event.preventDefault();
@@ -28,7 +29,8 @@ class Player {
             break;
         }
     }
-    moveLeft(){
+
+    moveLeft() {
 
         if (this.x - this.radius > 1) {
 
@@ -36,7 +38,8 @@ class Player {
         }
 
     }
-    moveRight(){
+
+    moveRight() {
 
         if (this.x + this.radius < canvas.width - 1){
 
@@ -44,7 +47,8 @@ class Player {
         }
         
     }
-    drawPlayer(){
+
+    drawPlayer() {
 
         ctx.beginPath();
         ctx.fillStyle = "black";
@@ -55,6 +59,7 @@ class Player {
         ctx.drawImage(this.img, this.x - this.radius + 2, this.y - this.radius + 1, this.width , this.height);
 
     }
+
     detectCollision(obstacle, i) {
 
         let dx = obstacle.x - this.x;
@@ -76,7 +81,6 @@ class Player {
                 this.updateHealth(10); //loose 10 points when hitting a badObstacle 
             }
             this.removeObstacle(i);
-            
         } 
 
         //removes obstacle from the array when theres no colision and obstacle is out of the canvas
@@ -94,7 +98,6 @@ class Player {
     removeObstacle(index) {
         
         currentGame.obstacles.splice(index,1);
-
     }
     
     updateHealth(damage) {
@@ -110,9 +113,7 @@ class Player {
                 this.health += 2; 
                 currentGame.score++;
             }
-        }
-        
+        } 
     }
-
 }
 

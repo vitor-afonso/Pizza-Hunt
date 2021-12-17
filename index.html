@@ -16,23 +16,27 @@
 
             <div><img src="images/game-logo.png" alt="logo"></div>
             <p id="instructions-text">Use the arrow keys left & right in your keybord to move your player. </br></br> Catching pizzas will increase your health. Missing to catch pizzas and being hit by Shredder will decrease your health. </br></br> Now that you are ready to catch them all, select your favourite ninja turtle and press "start game". </p>
+            <div id="highscore-container">
+                <h3>GAME RECORDS</h3>
+            </div>
             <a id="btn-start" href="#" class="btn">Start Game</a>
             <a id="btn-restart" href="#" class="btn hide-btn">Restart</a>
 
         </div>
 
-        <canvas class="" width="700" height="500">
-            
+        <div id="canvas-container">
+
             <div id="player-select">
 
-                <div id="leonardo" class="turtles"><img src="./images/leonardo.png" alt="Leonardo"></div>
-                <div id="donatello" class="turtles"><img src="./images/donatello.png" alt="Donatello"></div>
-                <div id="rafaello" class="turtles"><img src="./images/rafaello.png" alt="Rafaello"></div>
-                <div id="miguel-angelo" class="turtles"><img src="./images/miguel-angelo.png" alt="Miguel Angelo"></div>
+                <div class="turtles"><img id="leonardo" src="./images/leonardo.png" alt="Leonardo"></div>
+                <div class="turtles"><img id="donatello" src="./images/donatello.png" alt="Donatello"></div>
+                <div  class="turtles"><img id="rafaello" src="./images/rafaello.png" alt="Rafaello"></div>
+                <div class="turtles"><img id="miguel-angelo" src="./images/miguel-angelo.png" alt="Miguel Angelo"></div>
 
             </div>
-            
-        </canvas>
+
+            <canvas class="" width="700" height="500"></canvas>
+        </div>
 
         <audio id="game-audio" src="audio/ninjaturtles-instrumental.wav" preload="auto"></audio>
         <audio id="shredderHit" src="audio/shredder-hit.mp3" preload="auto"></audio>
@@ -42,8 +46,6 @@
     </section>
 
     
-    
-    <script src="js/choosePlayer.js"></script>
     <script src="js/player.js"></script>
     <script src="js/obstacle.js"></script>
     <script src="js/game.js"></script>
