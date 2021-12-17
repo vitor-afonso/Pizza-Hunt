@@ -33,6 +33,7 @@ class Game {
         ctx.fillStyle = '#FFF';
         ctx.fillText('You managed to catch ' + this.score + ' pizzas', 190, 310);
     }
+
     setHighScores(){
 
         let playerName = prompt("Nooooo! You Lost! Save your name for posterity!!");
@@ -41,8 +42,8 @@ class Game {
         playerObj[playerName] = this.score;
         playersArr.push(playerObj);
         localStorage.setItem('playersScore', JSON.stringify(playersArr));
-        
     }
+
     getHighScores(){
 
         let playersRecord = document.querySelector('#players-score');
@@ -60,7 +61,7 @@ class Game {
             let lastRecord = document.createElement('p');
             lastRecord.innerHTML = `${keyName}: ${element[keyName]}`;
             playersRecord.insertBefore(lastRecord, playersRecord.firstChild);
-            
+
         });
     }
 }

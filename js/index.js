@@ -30,7 +30,7 @@ function startGame() {
   window.addEventListener('keydown', (event) => {
     player.moveKey(event);
   });
-  
+
   document.querySelector('#btn-start').classList.toggle('hide-btn');
   document.querySelector('#btn-restart').classList.toggle('hide-btn');
   document.querySelector('#player-select').style.display = 'none';
@@ -103,15 +103,17 @@ function gameOver() {
 
   updateScreenScore('0');
 
-  currentGame.setHighScores();
   currentGame.drawGameOver();
-  currentGame.getHighScores();
+  document.querySelector('body').classList.remove('start-game');
+  document.querySelector('body').classList.add('game-over');
+
+  setTimeout(()=>{
+    currentGame.setHighScores();
+    currentGame.getHighScores();
+  }, 500);
 
   document.querySelector('#instructions-text').style.display = 'none';
   document.querySelector('#highscore-container').style.display = 'flex';
-  
-  document.querySelector('body').classList.remove('start-game');
-  document.querySelector('body').classList.add('game-over');
 }
 
 function restartGame() {
