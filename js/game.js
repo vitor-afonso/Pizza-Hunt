@@ -41,27 +41,34 @@ class Game {
         let playerObj = {};
         playerObj[playerName] = this.score;
         playersArr.push(playerObj);
+        //prevents localStorage from being bigger then 5
+        if (playersArr.length > 5) {
+            
+            playersArr.splice(0,1);
+        }
         localStorage.setItem('playersScore', JSON.stringify(playersArr));
     }
 
     getHighScores(){
 
-        let playersRecord = document.querySelector('#players-score');
+        let playersRecordContainer = document.querySelector('#players-score');
         
         // Retrieve the object from storage
         let retrievedArr = JSON.parse(localStorage.getItem('playersScore'));
 
-        if(retrievedArr.length > 4) {
-            delete retrievedArr[0];
-        }
-
+        //orders the list by the highest score
+        retrievedArr.sort((a, b) => Object.values(b) - Object.values(a));
+        
         retrievedArr.forEach(element => {
-            
+
             let keyName = Object.keys(element);
             let lastRecord = document.createElement('p');
+            
             lastRecord.innerHTML = `${keyName}: ${element[keyName]}`;
-            playersRecord.insertBefore(lastRecord, playersRecord.firstChild);
+            playersRecordContainer.appendChild(lastRecord);
 
-        });
+        });        
+
+        
     }
 }
